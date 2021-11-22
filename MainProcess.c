@@ -7,21 +7,30 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-
 int main(){
-    
+
     int first_ID = fork();
     int second_ID = fork();
 
+    // printf("first: %d =----= second: %d\n",first_ID, second_ID);
 
- if( first_ID == 0 && second_ID == 0 ){
+    if( first_ID == 0 && second_ID == 0 ){
+        //finder
 
+        char *args[]={"./finder",NULL};
+        execvp(args[0],args);
     }else if( first_ID > 0 && second_ID == 0 ){
-    
+        //placer
+        char *args[]={"./placer",NULL};
+        execvp(args[0],args);
     }else if( first_ID == 0 && second_ID > 0 ){
+        //decoder
+        char *args[]={"./decoder",NULL};
+        execvp(args[0],args);
 
+        //while(wait(NULL) > 0);
     }else if( first_ID > 0 && second_ID > 0 ){
-
+        //Main Process
 
         //Reading from file
         char *filename = "test.txt";
@@ -111,3 +120,6 @@ int main(){
 
     return 0;
 }
+
+
+
