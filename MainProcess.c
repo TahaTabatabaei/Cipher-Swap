@@ -12,8 +12,6 @@ int main(){
     int first_ID = fork();
     int second_ID = fork();
 
-    // printf("first: %d =----= second: %d\n",first_ID, second_ID);
-
     if( first_ID == 0 && second_ID == 0 ){
         //finder
 
@@ -112,8 +110,7 @@ int main(){
             read(fd, &finalResult[h], sizeof(char));
         }
         close(fd);
-        printf("asdasd");
-        printf("\nhey: %s",finalResult);
+        printf("\nfinal Result from MainProcess: %s",finalResult);
 
         while(wait(NULL) > 0);
     }

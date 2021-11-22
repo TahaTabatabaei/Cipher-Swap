@@ -20,7 +20,6 @@ int main(){
     }
     close(fd);
 
-    // printf("here is placer: %s",phrase);
 
     char finderDecoderFifo[] = "Finder_Placer";
     int fifo = open(finderDecoderFifo, O_RDONLY);
@@ -33,8 +32,6 @@ int main(){
         read(fd, &str[i], sizeof(char));
     }
     close(fd);
-
-    printf("here id placer: %s",str);
 
     char finalMessage[10000];
     int finalMessageCounter = 0;
@@ -53,7 +50,6 @@ int main(){
         }
     }
 
-    // printf("\nfinal : %s\n",finalMessage);
     char placerMainFifo[] = "Placer_Main";
     mkfifo("Placer_Main",0666);
     int placerMain_fd = open(placerMainFifo,O_WRONLY);

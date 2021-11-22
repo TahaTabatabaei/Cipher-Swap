@@ -70,7 +70,6 @@ int main(){
     char values[secondNumber+1];
     memcpy(values,&str[firstNumber],secondNumber);
     values[secondNumber] = '\0';
-    // printf("last: %s\n",values);
     strcat(result,values);
 
 
