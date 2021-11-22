@@ -58,7 +58,55 @@ int main(){
         char str_Part1[partDivider[0] + 1];
         memcpy(str_Part1, &str[0], (partDivider[0]+ 1));
         str_Part1[partDivider[0] + 1] = '\0';
- 
+
+        //part 2;
+        int part2_size = partDivider[1] - partDivider[0] - 3;
+        char str_Part2[part2_size + 1];
+        memcpy(str_Part2, &str[partDivider[0] + 4], part2_size);
+        str_Part2[part2_size] = '\0';
+
+        //part 3;
+        int part3_size = (counter - 1) - partDivider[1] - 3;
+        char str_Part3[part3_size + 1];
+        memcpy(str_Part3, &str[partDivider[1] + 4], part3_size);
+        str_Part3[part3_size] = '\0';
+
+        //send data to decoder
+        char mainDecoderFifo[] = "Main_Decoder";
+        mkfifo(mainDecoderFifo, 0666);
+        int fd_decoder = open(mainDecoderFifo,O_WRONLY);
+        write(fd_decoder, str_Part1 , strlen(str_Part1)+1);
+        close(fd_decoder);
+
+        //send data to finder
+        char mainFinderFifo[] = "Main_Finder";
+        mkfifo(mainFinderFifo, 0666);
+        int fd_finder = open(mainFinderFifo,O_WRONLY);
+        write(fd_finder, str_Part2 , strlen(str_Part2)+1);
+        close(fd_finder);
+
+
+        //send data to finder
+        char mainPlacerFifo[] = "Main_Placer";
+        mkfifo(mainPlacerFifo, 0666);
+        int fd_placer = open(mainPlacerFifo,O_WRONLY);
+        write(fd_placer, str_Part3 , strlen(str_Part3)+1);
+        close(fd_placer);
+
+        char placerDecoder[] = "Placer_Main";
+        int fd = open(placerDecoder, O_RDONLY);
+        char finalResult[10000];
+        int h = 0;
+        read(fd, &finalResult[h], sizeof(char));
+        while(str[h] != '\0'){
+            h++;
+            read(fd, &finalResult[h], sizeof(char));
+        }
+        close(fd);
+        printf("asdasd");
+        printf("\nhey: %s",finalResult);
+
+        while(wait(NULL) > 0);
     }
 
     return 0;
