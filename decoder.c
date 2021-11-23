@@ -8,6 +8,7 @@
 #include <sys/wait.h>
 
 int main(){
+  // read input
   char mainDecoderFifo[] = "Main_Decoder";
   int fd = open(mainDecoderFifo, O_RDONLY);
   char str[1000];
@@ -19,6 +20,7 @@ int main(){
   }
   close(fd);
 
+  //caesar chipher
   char ch;
   for(i = 0; str[i] != '\0'; ++i){
     ch = str[i];
@@ -44,10 +46,12 @@ int main(){
     }
   }
 
+  //print in a file
   FILE *out=fopen("decoder.txt","w");
   fputs(str,out);
   fclose(out);
 
+  //pass to finder
   char Decoder_Finder_Fifo[] = "Decoder_Finder";
   mkfifo(Decoder_Finder_Fifo,0666);
   int fd_fifo = open(Decoder_Finder_Fifo,O_WRONLY);
