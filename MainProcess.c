@@ -102,8 +102,8 @@ int main(){
         close(fd_placer);
 
         // read placer resualt
-        char placerDecoder[] = "Placer_Main";
-        int fd = open(placerDecoder, O_RDONLY);
+        char placerDecoderResualt[] = "Placer_Resualt";
+        int fd = open(placerDecoderResualt, O_RDONLY);
         char finalResult[10000];
         int h = 0;
         read(fd, &finalResult[h], sizeof(char));
