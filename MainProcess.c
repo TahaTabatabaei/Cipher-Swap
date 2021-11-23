@@ -51,6 +51,7 @@ int main(){
         fclose(fp);
         //end - Reading from file
 
+        // find index of  each part's ending
         int partCounter = 0;
         int partDivider[2]; 
         for(int i = 0; i < counter ; i++){
