@@ -94,13 +94,14 @@ int main(){
         close(fd_finder);
 
 
-        //send data to finder
+        //send data to placer
         char mainPlacerFifo[] = "Main_Placer";
         mkfifo(mainPlacerFifo, 0666);
         int fd_placer = open(mainPlacerFifo,O_WRONLY);
         write(fd_placer, str_Part3 , strlen(str_Part3)+1);
         close(fd_placer);
 
+        // read placer resualt
         char placerDecoder[] = "Placer_Main";
         int fd = open(placerDecoder, O_RDONLY);
         char finalResult[10000];
