@@ -8,7 +8,6 @@
 #include <sys/wait.h>
 
 int main(){
-  // read input
   char mainDecoderFifo[] = "Main_Decoder";
   int fd = open(mainDecoderFifo, O_RDONLY);
   char str[1000];
@@ -20,38 +19,42 @@ int main(){
   }
   close(fd);
 
-  //caesar chipher
+  // caesar cipher
   char ch;
   for(i = 0; str[i] != '\0'; ++i){
     ch = str[i];
-    if(ch >= 'a' && ch <= 'z'){
-      ch = ch + 3;
-      if(ch < 'a'){
-        ch = ch + 'z' - 'a' + 1;
+    if(ch >= 'd' && ch <= 'z'){
+      ch = ch - 3;
       }
-      str[i] = ch;
-    }
-    else if(ch >= 'A' && ch <= 'Z'){
-      ch = ch + 3;
-      if(ch < 'A'){
-        ch = ch + 'Z' - 'A' + 1;
+    else if ( ch == 'a'){
+        ch = 'x';
+        }
+    else if( ch == 'b'){
+        ch = 'y';
+        }
+    else if(ch == 'c'){
+       ch = 'z';
+       }   
+    else if(ch >= 'D' && ch <= 'Z'){
+      ch = ch - 3;
       }
-      str[i] = ch;
-    }
-
-    if(str[i] == '{'){
-      str[i] = 'a';
-    }else if(str[i] == '}'){
-      str[i] = 'c';
-    }
+    else if ( ch == 'A'){
+        ch = 'X';
+        }
+    else if( ch == 'B'){
+        ch = 'Y';
+        }
+    else if(ch == 'C'){
+       ch = 'Z';
+       }   
+      
+    str[i] = ch;
   }
 
-  //print in a file
   FILE *out=fopen("decoder.txt","w");
   fputs(str,out);
   fclose(out);
 
-  //pass to finder
   char Decoder_Finder_Fifo[] = "Decoder_Finder";
   mkfifo(Decoder_Finder_Fifo,0666);
   int fd_fifo = open(Decoder_Finder_Fifo,O_WRONLY);
@@ -61,4 +64,3 @@ int main(){
   while(wait(NULL) > 0);
   return 0;
 }
-
