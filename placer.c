@@ -50,10 +50,17 @@ int main(){
         }
     }
 
+    //printf("**%s\n", finalMessage);
     char placerMainFifo[] = "Placer_Main";
-    mkfifo("Placer_Main",0666);
+    mkfifo("Placer_Main" ,0666);
     int placerMain_fd = open(placerMainFifo,O_WRONLY);
     write(placerMain_fd,finalMessage, strlen(finalMessage));
     close(placerMain_fd);
+    
+    
+    
+  FILE *out=fopen("placer_resault.txt","w");
+  fputs(finalMessage ,out);
+  fclose(out);
     return 0;
 }
