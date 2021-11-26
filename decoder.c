@@ -10,15 +10,19 @@
 int main(){
   char mainDecoderFifo[] = "Main_Decoder";
   int fd = open(mainDecoderFifo, O_RDONLY);
-  char str[1000];
+  char str[10000];
+  char charFromMain;
   int i = 0;
-  read(fd, &str[i], sizeof(char));
-  while(str[i] != '\0'){
-    i++;
-    if ( str[i] != ' ' && str[i] != '\n'){
-    read(fd, &str[i], sizeof(char));
+  read(fd, &charFromMain, sizeof(char));
+  while(charFromMain != '\0'){
+    if(charFromMain != ' ' && charFromMain != '\n'){
+      read(fd, &str[i], sizeof(char));
+      i++;
     }
+    read(fd, &charFromMain, sizeof(char));
   }
+  str[i] = '\n';
+  
   close(fd);
 
   // caesar cipher
