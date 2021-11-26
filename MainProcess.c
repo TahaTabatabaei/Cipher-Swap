@@ -102,7 +102,7 @@ int main(){
         close(fd_placer);
 
         // read placer resualt
-        char placerDecoderResualt[] = "Placer_Resualt";
+        char placerDecoderResualt[] = "Placer_Main";
         int fd = open(placerDecoderResualt, O_RDONLY);
         char finalResult[10000];
         int h = 0;
@@ -112,13 +112,12 @@ int main(){
             read(fd, &finalResult[h], sizeof(char));
         }
         close(fd);
-        printf("\nfinal Result from MainProcess: %s",finalResult);
+        printf("\nfinal Result from MainProcess: %s\n",finalResult);
 
         while(wait(NULL) > 0);
     }
 
     return 0;
 }
-
 
 
