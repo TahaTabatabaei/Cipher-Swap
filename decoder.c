@@ -10,42 +10,49 @@
 int main(){
   char mainDecoderFifo[] = "Main_Decoder";
   int fd = open(mainDecoderFifo, O_RDONLY);
-  char str[1000];
+  char str[10000];
+  char charFromMain;
   int i = 0;
-  read(fd, &str[i], sizeof(char));
-  while(str[i] != '\0'){
-    i++;
-    read(fd, &str[i], sizeof(char));
+  read(fd, &charFromMain, sizeof(char));
+  while(charFromMain != '\0'){
+    if(charFromMain != ' ' && charFromMain != '\n'){
+     // read(fd, &str[i], sizeof(char));
+     str[i] = charFromMain;
+      i++;
+    }
+    read(fd, &charFromMain, sizeof(char));
   }
+  str[i] = '\0';
+  
   close(fd);
 
   // caesar cipher
-  char ch;
+   char ch;
   for(i = 0; str[i] != '\0'; ++i){
     ch = str[i];
-    if(ch >= 'd' && ch <= 'z'){
-      ch = ch - 3;
+    if(ch >= 'a' && ch <= 'w'){
+      ch = ch + 3;
       }
-    else if ( ch == 'a'){
-        ch = 'x';
+    else if ( ch == 'x'){
+        ch = 'a';
         }
-    else if( ch == 'b'){
-        ch = 'y';
+    else if( ch == 'y'){
+        ch = 'b';
         }
-    else if(ch == 'c'){
-       ch = 'z';
+    else if(ch == 'z'){
+       ch = 'c';
        }   
-    else if(ch >= 'D' && ch <= 'Z'){
-      ch = ch - 3;
+    else if(ch >= 'A' && ch <= 'W'){
+      ch = ch + 3;
       }
-    else if ( ch == 'A'){
-        ch = 'X';
+    else if ( ch == 'X'){
+        ch = 'A';
         }
-    else if( ch == 'B'){
-        ch = 'Y';
+    else if( ch == 'Y'){
+        ch = 'B';
         }
-    else if(ch == 'C'){
-       ch = 'Z';
+    else if(ch == 'Z'){
+       ch = 'C';
        }   
       
     str[i] = ch;
