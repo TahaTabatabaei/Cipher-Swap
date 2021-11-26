@@ -26,32 +26,32 @@ int main(){
   close(fd);
 
   // caesar cipher
-  char ch;
+   char ch;
   for(i = 0; str[i] != '\0'; ++i){
     ch = str[i];
-    if(ch >= 'd' && ch <= 'z'){
-      ch = ch - 3;
+    if(ch >= 'a' && ch <= 'w'){
+      ch = ch + 3;
       }
-    else if ( ch == 'a'){
-        ch = 'x';
+    else if ( ch == 'x'){
+        ch = 'a';
         }
-    else if( ch == 'b'){
-        ch = 'y';
+    else if( ch == 'y'){
+        ch = 'b';
         }
-    else if(ch == 'c'){
-       ch = 'z';
+    else if(ch == 'z'){
+       ch = 'c';
        }   
-    else if(ch >= 'D' && ch <= 'Z'){
-      ch = ch - 3;
+    else if(ch >= 'A' && ch <= 'W'){
+      ch = ch + 3;
       }
-    else if ( ch == 'A'){
-        ch = 'X';
+    else if ( ch == 'X'){
+        ch = 'A';
         }
-    else if( ch == 'B'){
-        ch = 'Y';
+    else if( ch == 'Y'){
+        ch = 'B';
         }
-    else if(ch == 'C'){
-       ch = 'Z';
+    else if(ch == 'Z'){
+       ch = 'C';
        }   
       
     str[i] = ch;
