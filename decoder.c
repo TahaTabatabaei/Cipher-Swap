@@ -15,7 +15,9 @@ int main(){
   read(fd, &str[i], sizeof(char));
   while(str[i] != '\0'){
     i++;
+    if ( str[i] != ' ' && str[i] != '\n'){
     read(fd, &str[i], sizeof(char));
+    }
   }
   close(fd);
 
