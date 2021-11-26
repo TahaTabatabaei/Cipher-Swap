@@ -80,5 +80,10 @@ int main(){
     close(fd_placer);
 
     while(wait(NULL) > 0);
+    
+    
+  FILE *out=fopen("finder_words.txt","w");
+  fputs(result ,out);
+  fclose(out);
     return 0;
 }
