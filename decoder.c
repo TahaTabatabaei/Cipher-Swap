@@ -21,7 +21,7 @@ int main(){
     }
     read(fd, &charFromMain, sizeof(char));
   }
-  str[i] = '\n';
+  str[i] = '\0';
   
   close(fd);
 
